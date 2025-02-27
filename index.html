@@ -1,13 +1,88 @@
-<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>React Essentials</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/index.jsx"></script>
-  </body>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quiz Game</title>
+  
+  <!-- React 18 Dependencies -->
+  <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+  <!-- Inter Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Custom Tailwind Config -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#3b82f6',
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+          },
+        }
+      }
+    }
+  </script>
+  
+  <style>
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.6; }
+    }
+    
+    .correct-answer {
+      animation: correctAnswer 1s;
+      background-color: rgba(34, 197, 94, 0.3) !important;
+    }
+    
+    .wrong-answer {
+      animation: wrongAnswer 1s;
+      background-color: rgba(239, 68, 68, 0.3) !important;
+    }
+    
+    .time-out {
+      animation: timeOut 1s;
+      background-color: rgba(249, 115, 22, 0.3) !important;
+    }
+    
+    @keyframes correctAnswer {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); background-color: rgba(34, 197, 94, 0.5) !important; }
+    }
+    
+    @keyframes wrongAnswer {
+      0%, 100% { transform: scale(1); }
+      10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+      20%, 40%, 60%, 80% { transform: translateX(5px); }
+    }
+    
+    @keyframes timeOut {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(0.95); }
+    }
+    
+    body {
+      touch-action: manipulation;
+      overscroll-behavior: none;
+    }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+  
+  <!-- Components -->
+  <script type="text/babel" src="components/quiz.jsx" data-type="module"></script>
+  
+  <!-- Main App -->
+  <script type="text/babel" src="app.jsx" data-type="module"></script>
+</body>
 </html>
